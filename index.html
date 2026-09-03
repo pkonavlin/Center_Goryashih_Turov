@@ -72,84 +72,66 @@
     font-family:'IBM Plex Mono', ui-monospace, monospace;
   }
 
-  .layout{
-    display:flex;
-    align-items:flex-start;
-    max-width:1240px;
-    margin:0 auto;
-  }
-
-  /* ---- NAV ---- */
-  nav.rail{
+  /* ---- TOP BAR ---- */
+  .topbar{
     position:sticky;
     top:0;
-    height:100vh;
-    width:230px;
-    flex:0 0 230px;
-    padding:32px 20px 32px 32px;
+    z-index:50;
     display:flex;
-    flex-direction:column;
-    gap:28px;
-    overflow-y:auto;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:4px 8px;
+    padding:14px 32px;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
   }
-  .rail-brand{
+  .topbar .brand{
     font-family:'Bricolage Grotesque', sans-serif;
     font-weight:800;
-    font-size:1.05rem;
-    line-height:1.25;
+    font-size:1.02rem;
+    margin-right:28px;
+    white-space:nowrap;
   }
-  .rail-brand .mono{
+  .topbar .brand .mono{
     display:block;
-    font-size:0.68rem;
+    font-size:0.62rem;
     color:var(--coral);
     letter-spacing:0.08em;
     text-transform:uppercase;
-    margin-bottom:6px;
     font-weight:500;
+    margin-bottom:2px;
   }
-  .rail-links{
+  .topbar nav{
     display:flex;
-    flex-direction:column;
+    flex-wrap:wrap;
     gap:2px;
-    list-style:none;
-    padding:0;
-    margin:0;
-    border-top:1px solid var(--line);
-    padding-top:20px;
   }
-  .rail-links a{
+  .topbar nav a{
     display:flex;
     align-items:baseline;
-    gap:8px;
+    gap:6px;
     text-decoration:none;
     color:var(--muted);
-    font-size:0.88rem;
+    font-size:0.86rem;
     font-weight:600;
-    padding:8px 10px;
-    border-radius:8px;
+    padding:8px 12px;
+    border-radius:100px;
     transition:background .15s ease, color .15s ease;
+    white-space:nowrap;
   }
-  .rail-links a:hover{background:var(--ice); color:var(--ink);}
-  .rail-links .mono{font-size:0.68rem; color:var(--coral); min-width:1.4em;}
-  .rail-meta{
-    margin-top:auto;
-    border-top:1px solid var(--line);
-    padding-top:16px;
-    font-size:0.72rem;
-    color:var(--muted);
-  }
-  .rail-meta div{margin-bottom:4px;}
+  .topbar nav a:hover{background:var(--ice); color:var(--ink);}
+  .topbar nav a .mono{font-size:0.66rem; color:var(--coral);}
 
   /* ---- MAIN ---- */
   main{
-    flex:1 1 auto;
-    min-width:0;
-    padding:56px 48px 100px 48px;
+    max-width:960px;
+    margin:0 auto;
+    padding:48px 32px 100px 32px;
   }
   section{
     padding-top:64px;
     margin-top:-8px;
-    scroll-margin-top:24px;
+    scroll-margin-top:84px;
   }
   section:first-of-type{padding-top:0;}
 
@@ -167,7 +149,7 @@
   .section-sub{
     color:var(--muted);
     font-size:0.98rem;
-    max-width:62ch;
+    max-width:66ch;
     margin-top:8px;
   }
 
@@ -178,9 +160,9 @@
     margin-bottom:8px;
   }
   header.hero .eyebrow{margin-bottom:16px;}
-  header.hero h1{font-size:clamp(2rem,3.4vw,2.8rem); max-width:16ch;}
+  header.hero h1{font-size:clamp(2rem,3.4vw,2.8rem); max-width:20ch;}
   header.hero p{
-    max-width:60ch;
+    max-width:66ch;
     color:var(--muted);
     font-size:1.05rem;
     margin-top:16px;
@@ -239,19 +221,6 @@
   }
 
   /* brandbook */
-  .brand-flag{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:var(--chip-bg);
-    color:var(--chip-text);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:10px 14px;
-    font-size:0.85rem;
-    margin-top:20px;
-    max-width:64ch;
-  }
   .brand-grid{
     display:grid;
     grid-template-columns:1.1fr 1fr;
@@ -262,13 +231,22 @@
 
   .swatches{display:flex; gap:10px; flex-wrap:wrap;}
   .swatch{
-    width:104px;
+    width:112px;
   }
   .swatch .chip{
     height:72px;
     border-radius:10px;
     border:1px solid var(--line);
     margin-bottom:8px;
+  }
+  .swatch .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.6rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--coral);
+    display:block;
+    margin-bottom:3px;
   }
   .swatch .name{font-size:0.78rem; font-weight:600;}
   .swatch .hex{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted);}
@@ -325,14 +303,8 @@
   }
   .cycle-step h4{font-size:1rem; margin-bottom:8px;}
   .cycle-step p{font-size:0.85rem; color:var(--muted); margin:0;}
-  .cycle-arrow{
-    display:none;
-  }
-  @media (min-width:901px){
-    .cycle{position:relative;}
-  }
 
-  /* theme cards (news) */
+  /* theme cards (news + stories share this component) */
   .theme-card{
     background:var(--card);
     border:1px solid var(--line);
@@ -341,6 +313,7 @@
     margin-top:22px;
     box-shadow:var(--shadow);
   }
+  .theme-card.compact{padding:22px 24px;}
   .theme-head{
     display:flex;
     justify-content:space-between;
@@ -356,6 +329,7 @@
     margin-bottom:8px;
   }
   .theme-head h3{font-size:1.28rem; max-width:44ch;}
+  .theme-card.compact .theme-head h3{font-size:1.1rem;}
   .tag{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.7rem;
@@ -430,61 +404,17 @@
   }
   .cover-block p{margin:0; font-size:0.92rem; color:var(--ink);}
 
-  /* stories */
   .stories-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:20px;
-    margin-top:28px;
+    margin-top:0;
   }
   @media (max-width:760px){ .stories-grid{grid-template-columns:1fr;} }
-  .story-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-  }
-  .story-card-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 20px;
-    border-bottom:1px solid var(--line);
-    background:var(--ice);
-  }
-  .story-card-head span.mono{font-size:0.72rem; color:var(--muted);}
-  .story-card-head h4{font-size:1rem;}
-  .story-screens{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-  }
-  .screen{
-    padding:18px 20px;
-    min-height:150px;
-  }
-  .screen + .screen{border-left:1px solid var(--line);}
-  .screen .screen-lbl{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.66rem;
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    color:var(--coral);
-    display:block;
-    margin-bottom:10px;
-  }
-  .screen p{margin:0 0 8px 0; font-size:0.88rem;}
-  .screen ul{margin:0; padding-left:16px; font-size:0.86rem;}
-  .screen li{margin-bottom:4px;}
-  .screen .cta-mini{
-    margin-top:10px;
-    font-size:0.8rem;
-    font-weight:600;
-    color:var(--coral);
-  }
 
   /* sources */
   footer.sources{
-    margin-top:64px;
+    margin-top:56px;
     padding-top:24px;
     border-top:1px solid var(--line);
   }
@@ -501,441 +431,524 @@
     text-decoration:none;
   }
   footer.sources a:hover{text-decoration:underline;}
+  footer.sources li{font-size:0.88rem; color:var(--muted);}
 
-  @media (max-width:900px){
-    .layout{flex-direction:column;}
-    nav.rail{
-      position:relative;
-      height:auto;
-      width:100%;
-      flex:none;
-      padding:24px 24px 0 24px;
-      border-bottom:1px solid var(--line);
-    }
-    main{padding:32px 24px 80px 24px;}
+  /* карта тем */
+  .map-timeline{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    margin-top:28px;
+  }
+  .map-cycle{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px 28px;
+  }
+  .map-cycle-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .map-cycle-head h4{font-size:1.05rem;}
+  .badge-current{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    background:var(--coral);
+    color:#fff;
+    padding:4px 11px;
+    border-radius:100px;
+  }
+  .map-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  @media (max-width:700px){ .map-cols{grid-template-columns:1fr;} }
+  .map-cols h5{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--teal);
+    margin:0 0 12px 0;
+  }
+  .map-cols ul{margin:0; padding-left:18px;}
+  .map-cols li{margin-bottom:10px; font-size:0.9rem;}
+  .map-cols li b{display:block; font-weight:600; color:var(--ink); font-size:0.92rem;}
+  .map-cols li span{display:block; color:var(--muted); font-size:0.83rem; margin-top:2px;}
+
+  @media (max-width:700px){
+    .topbar{padding:12px 20px;}
+    main{padding:32px 20px 80px 20px;}
   }
 </style>
 </head>
 <body>
 
-<div class="layout">
-  <nav class="rail">
-    <div class="rail-brand">
-      <span class="mono">ТЗ · Контент-цикл</span>
-      Центр Горящих Туров
-    </div>
-    <ul class="rail-links">
-      <li><a href="#company"><span class="mono">01</span> Компания</a></li>
-      <li><a href="#brandbook"><span class="mono">02</span> Мини-брендбук</a></li>
-      <li><a href="#cycle"><span class="mono">03</span> Логика цикла</a></li>
-      <li><a href="#news"><span class="mono">04</span> Новости</a></li>
-      <li><a href="#stories"><span class="mono">05</span> Сторис</a></li>
-      <li><a href="#sources"><span class="mono">06</span> Источники</a></li>
-    </ul>
-    <div class="rail-meta mono">
-      <div>Москва, msk.centrturov.ru</div>
-      <div>Турагентство · Авиабилеты · Экскурсии</div>
-      <div>4 новости + обложка · 4 сторис</div>
-    </div>
+
+<div class="topbar">
+  <div class="brand"><span class="mono">ТЗ · Контент-цикл</span>Центр Горящих Туров</div>
+  <nav>
+    <a href="#company"><span class="mono">01</span> Компания</a>
+    <a href="#brandbook"><span class="mono">02</span> Брендбук</a>
+    <a href="#cycle"><span class="mono">03</span> Логика цикла</a>
+    <a href="#news"><span class="mono">04</span> Новости</a>
+    <a href="#stories"><span class="mono">05</span> Сторис</a>
+    <a href="#map"><span class="mono">06</span> Карта тем</a>
   </nav>
-
-  <main>
-    <header class="hero">
-      <span class="eyebrow">Техническое задание · контент-цикл №1</span>
-      <h1>Центр Горящих Туров</h1>
-      <p>Комплект тем для новостей и сторис турагентства в Москве. Последовательность строится от знакомства с компанией к спектру услуг, географии направлений и причинам доверия — без завышенных эпитетов, на фактах и цифрах.</p>
-      <div class="hero-meta">
-        <span>4 новости + ТЗ на обложку</span>
-        <span>4 сторис · обложка + 1 слайд</span>
-        <span>SEO-контур на каждую тему</span>
-      </div>
-    </header>
-
-    <section id="company">
-      <span class="eyebrow">01 · Компания</span>
-      <h2>Центр Горящих Туров, Москва</h2>
-      <p class="section-sub">Ключевые факты для опоры контента — из открытых страниц сайта msk.centrturov.ru.</p>
-
-      <div class="facts-grid">
-        <div class="fact"><span class="k">Ниша</span><div class="v">Турагентство<small>Туры, авиабилеты, экскурсии, страхование, визы</small></div></div>
-        <div class="fact"><span class="k">На рынке</span><div class="v">С 2015 года<small>~9 лет работы</small></div></div>
-        <div class="fact"><span class="k">Клиенты</span><div class="v">17 000+ в год<small>по данным сайта компании</small></div></div>
-        <div class="fact"><span class="k">География туров</span><div class="v">180 стран<small>1000+ направлений горящих туров</small></div></div>
-        <div class="fact"><span class="k">Офис</span><div class="v">ТЦ Global Mall<small>ул. Ленинская Слобода, 26, стр. 2, офис А 212.2</small></div></div>
-        <div class="fact"><span class="k">Контакты</span><div class="v">+7 905 501-00-15<small>msk@centrturov.ru</small></div></div>
-        <div class="fact"><span class="k">Ключевые направления</span><div class="v">Турция, Египет, ОАЭ<small>Таиланд, Мальдивы + горящие туры</small></div></div>
-        <div class="fact"><span class="k">Доп. услуги</span><div class="v">Визы, страховка<small>бронирование жилья, миграционные услуги</small></div></div>
-      </div>
-    </section>
-
-    <section id="brandbook">
-      <span class="eyebrow">02 · Мини-брендбук</span>
-      <h2>Визуальное и тональное направление</h2>
-      <p class="section-sub">На сайте не заданы фирменные цвета и типографика в явном виде — ниже рекомендуемое направление для соцсетей, а не аудит текущего оформления.</p>
-
-      <div class="brand-grid">
-        <div>
-          <div class="brand-card">
-            <h4>Палитра</h4>
-            <div class="swatches">
-              <div class="swatch"><div class="chip" style="background:#0B4F6C"></div><div class="name">Ocean</div><div class="hex">#0B4F6C</div></div>
-              <div class="swatch"><div class="chip" style="background:#FF6A3D"></div><div class="name">Sunset (горящие туры)</div><div class="hex">#FF6A3D</div></div>
-              <div class="swatch"><div class="chip" style="background:#F4C95D"></div><div class="name">Sand</div><div class="hex">#F4C95D</div></div>
-              <div class="swatch"><div class="chip" style="background:#FCEEDD"></div><div class="name">Cream</div><div class="hex">#FCEEDD</div></div>
-              <div class="swatch"><div class="chip" style="background:#1F2A33; border-color:#1F2A33"></div><div class="name">Charcoal (текст)</div><div class="hex">#1F2A33</div></div>
-            </div>
-          </div>
-          <div class="brand-card">
-            <h4>Типографика</h4>
-            <div class="type-sample">Заголовки</div>
-            <div class="type-label">Плотный геометричный гротеск, крупный кегль в заголовках</div>
-            <div class="type-sample body">Текст постов и подписи набираются нейтральным читаемым гротеском.</div>
-            <div class="type-label">Основной текст</div>
-            <div class="type-sample mono">ЦЕНА · ДАТЫ · –30%</div>
-            <div class="type-label" style="margin-bottom:0;">Цифры, цены, даты — моноширинным или капслоком для акцента</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="brand-card">
-            <h4>Фото и графика</h4>
-            <ul>
-              <li>Реальные кадры направлений и отдыха вместо шаблонных стоков; тёплый, «золотой час» тон вместо холодной пересветки</li>
-              <li>В кадре — люди и живые сцены (пляж, аэропорт, экскурсия), не только пустые пейзажи</li>
-              <li>Единая система иконок для услуг: самолёт, паспорт/виза, полис, отель, гид — округлые, одной толщины линии</li>
-              <li>Акцентные плашки с цифрами (цена, скидка, даты) — компактные, без «кричащих» баннеров</li>
-            </ul>
-          </div>
-          <div class="brand-card">
-            <h4>Тон коммуникации</h4>
-            <ul>
-              <li>Спокойный, фактологический тон travel-эксперта — без «лучший», «топовый», «№1»</li>
-              <li>Аргумент — через цифры и конкретику (страны, годы, отзывы), а не превосходные степени</li>
-              <li>Срочность горящих туров передаётся датами и ценами, а не восклицательными знаками</li>
-              <li>Прямое обращение на «вы», короткие предложения, понятные CTA</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="cycle">
-      <span class="eyebrow">03 · Логика цикла</span>
-      <h2>Единая последовательность на новости и сторис</h2>
-      <p class="section-sub">Четыре темы идут от знакомства с компанией к сути услуг, географии и причинам доверия — без повторов и скачков контекста.</p>
-
-      <div class="cycle">
-        <div class="cycle-step">
-          <span class="num">01</span>
-          <h4>Знакомство</h4>
-          <p>Кто такая компания: сколько лет на рынке, сколько клиентов и стран</p>
-        </div>
-        <div class="cycle-step">
-          <span class="num">02</span>
-          <h4>Услуги</h4>
-          <p>Что решает агентство за один визит: туры, билеты, визы, страховка</p>
-        </div>
-        <div class="cycle-step">
-          <span class="num">03</span>
-          <h4>География</h4>
-          <p>Куда сейчас едут и где искать горящие туры</p>
-        </div>
-        <div class="cycle-step">
-          <span class="num">04</span>
-          <h4>Доверие</h4>
-          <p>Как устроен подбор тура и на что можно рассчитывать в поездке</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="news">
-      <span class="eyebrow">04 · Новости</span>
-      <h2>4 темы + ТЗ на обложку</h2>
-      <p class="section-sub">Каждая карточка — заголовок, цель публикации, тезисы для копирайтера, SEO-ключи, CTA и отдельное ТЗ на обложку.</p>
-
-      <!-- NEWS 1 -->
-      <article class="theme-card">
-        <div class="theme-head">
-          <div>
-            <span class="theme-num">Новость 01 · Знакомство</span>
-            <h3>9 лет и 17 000+ путешественников в год: как работает Центр Горящих Туров в Москве</h3>
-          </div>
-          <span class="tag">Имиджевый</span>
-        </div>
-        <div class="theme-body">
-          <div class="theme-block">
-            <h5>Почему актуально</h5>
-            <p>Новые подписчики не знают, кто ведёт аккаунт и почему агентству можно доверить бронирование. Факты о масштабе работают на брендовые запросы и снимают первое недоверие ещё до контакта с менеджером.</p>
-          </div>
-          <div class="theme-block">
-            <h5>Тезисы для копирайтера</h5>
-            <ul>
-              <li>Компания на рынке с 2015 года, офис — ТЦ Global Mall, ул. Ленинская Слобода, 26</li>
-              <li>Подбор туров в 180 стран, свыше 17 000 клиентов в год</li>
-              <li>Помимо туров — авиабилеты, экскурсии, бронирование жилья, визы и страхование в одном агентстве</li>
-              <li>Без превосходных степеней: цифры и факты вместо оценочных слов</li>
-            </ul>
-          </div>
-          <div class="theme-block full-row">
-            <h5>SEO-ключи</h5>
-            <div class="chips">
-              <span class="chip-tag">турагентство москва</span>
-              <span class="chip-tag">центр горящих туров москва</span>
-              <span class="chip-tag">турагентство ленинская слобода</span>
-              <span class="chip-tag">купить тур в москве</span>
-              <span class="chip-tag">надёжное турагентство</span>
-            </div>
-          </div>
-          <div class="theme-block full-row">
-            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Оставьте заявку — подберём тур под ваш бюджет и даты</span></div>
-          </div>
-        </div>
-        <div class="cover-block">
-          <h5>ТЗ на обложку</h5>
-          <p>Логотип и статистика-хедлайн «9 лет / 17 000 клиентов / 180 стран» на тёплом фоне (закат, крыло самолёта или побережье). Без стоковых клише, акцент — на цифрах, а не на слогане.</p>
-        </div>
-      </article>
-
-      <!-- NEWS 2 -->
-      <article class="theme-card">
-        <div class="theme-head">
-          <div>
-            <span class="theme-num">Новость 02 · Услуги</span>
-            <h3>Тур, авиабилеты, виза и страховка — в одном агентстве и без беготни по разным сайтам</h3>
-          </div>
-          <span class="tag">Продающий</span>
-        </div>
-        <div class="theme-body">
-          <div class="theme-block">
-            <h5>Почему актуально</h5>
-            <p>Часть аудитории знает компанию только как «продавца туров» и ищет авиабилеты, визы и страховку отдельно на других сервисах. Пост закрывает кросс-продажи и объясняет, что все задачи поездки решаются в одном месте.</p>
-          </div>
-          <div class="theme-block">
-            <h5>Тезисы для копирайтера</h5>
-            <ul>
-              <li>Подбор и бронирование туров у проверенных туроператоров</li>
-              <li>Отдельная продажа авиабилетов без покупки тура</li>
-              <li>Бронирование отелей и апартаментов, экскурсии по направлению</li>
-              <li>Оформление турстраховки и помощь с визами; отдельно — миграционные услуги (получение гражданства ЕС)</li>
-              <li>Связь через телефон, мессенджеры и офис — на выбор клиента</li>
-            </ul>
-          </div>
-          <div class="theme-block full-row">
-            <h5>SEO-ключи</h5>
-            <div class="chips">
-              <span class="chip-tag">авиабилеты москва дёшево</span>
-              <span class="chip-tag">оформление визы москва</span>
-              <span class="chip-tag">страховка для путешествий купить</span>
-              <span class="chip-tag">экскурсии заказать</span>
-              <span class="chip-tag">бронирование отеля тур</span>
-            </div>
-          </div>
-          <div class="theme-block full-row">
-            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Напишите нам — решим любую задачу вашей поездки в одном чате</span></div>
-          </div>
-        </div>
-        <div class="cover-block">
-          <h5>ТЗ на обложку</h5>
-          <p>Иконка-сетка из 5–6 услуг (самолёт, паспорт/виза, полис, отель, гид) в едином графическом стиле, один акцентный цвет на иконку. Заголовок обложки — «Всё для поездки в одном месте».</p>
-        </div>
-      </article>
-
-      <!-- NEWS 3 -->
-      <article class="theme-card">
-        <div class="theme-head">
-          <div>
-            <span class="theme-num">Новость 03 · География</span>
-            <h3>Турция, Египет, ОАЭ, Таиланд, Мальдивы и ещё 1000+ направлений: где искать горящие туры</h3>
-          </div>
-          <span class="tag">Продающий</span>
-        </div>
-        <div class="theme-body">
-          <div class="theme-block">
-            <h5>Почему актуально</h5>
-            <p>Запросы про «горящие туры» и конкретные направления — самый частый повод для обращения. Пост объясняет суть формата и переводит интерес в заявку, оставаясь актуальным при любом сезоне за счёт формулировки.</p>
-          </div>
-          <div class="theme-block">
-            <h5>Тезисы для копирайтера</h5>
-            <ul>
-              <li>Горящий тур — пакет со скидкой от туроператора на скорый вылет, а не отдельная категория направлений</li>
-              <li>Ключевые направления: Турция, Египет, ОАЭ, Таиланд, Мальдивы</li>
-              <li>Всего доступно 1000+ направлений — от пляжного отдыха до экскурсионных и комбинированных туров</li>
-              <li>Подбор идёт по бюджету и датам клиента, а не по фиксированному списку предложений</li>
-            </ul>
-          </div>
-          <div class="theme-block full-row">
-            <h5>SEO-ключи</h5>
-            <div class="chips">
-              <span class="chip-tag">горящие туры из москвы</span>
-              <span class="chip-tag">туры в турцию из москвы</span>
-              <span class="chip-tag">туры в египет недорого</span>
-              <span class="chip-tag">горящие туры оаэ</span>
-              <span class="chip-tag">туры на мальдивы</span>
-            </div>
-          </div>
-          <div class="theme-block full-row">
-            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Оставьте параметры поездки — пришлём варианты туров в течение часа</span></div>
-          </div>
-        </div>
-        <div class="cover-block">
-          <h5>ТЗ на обложку</h5>
-          <p>Коллаж-подборка направлений: 5 меток/тегов с названиями стран на карте или сетке кадров, заголовок «1000+ направлений». Цветовая маркировка регионов вместо ярких «SALE»-баннеров.</p>
-        </div>
-      </article>
-
-      <!-- NEWS 4 -->
-      <article class="theme-card">
-        <div class="theme-head">
-          <div>
-            <span class="theme-num">Новость 04 · Доверие</span>
-            <h3>Как в Центре Горящих Туров подбирают тур: проверенные операторы, цена без доплат, поддержка на всех этапах</h3>
-          </div>
-          <span class="tag">Экспертный</span>
-        </div>
-        <div class="theme-body">
-          <div class="theme-block">
-            <h5>Почему актуально</h5>
-            <p>Перед бронированием клиенты чаще всего сомневаются в честности цены, надёжности оператора и в том, что будет, если что-то пойдёт не так в поездке. Пост закрывает эти возражения фактами о процессе — и подводит к заявке.</p>
-          </div>
-          <div class="theme-block">
-            <h5>Тезисы для копирайтера</h5>
-            <ul>
-              <li>Сравнение предложений нескольких проверенных туроператоров перед тем, как показать вариант клиенту</li>
-              <li>Цена фиксируется на этапе подбора — без скрытых доплат</li>
-              <li>Сопровождение клиента с момента заявки до возвращения из поездки</li>
-              <li>Связь доступна по звонку и в мессенджерах — можно сослаться на раздел «Отзывы» на сайте компании</li>
-            </ul>
-          </div>
-          <div class="theme-block full-row">
-            <h5>SEO-ключи</h5>
-            <div class="chips">
-              <span class="chip-tag">турагентство отзывы москва</span>
-              <span class="chip-tag">как выбрать тур</span>
-              <span class="chip-tag">надёжный туроператор</span>
-              <span class="chip-tag">поддержка в поездке турагентство</span>
-              <span class="chip-tag">заявка на подбор тура</span>
-            </div>
-          </div>
-          <div class="theme-block full-row">
-            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Есть вопрос перед бронированием? Ответим в течение 15 минут</span></div>
-          </div>
-        </div>
-        <div class="cover-block">
-          <h5>ТЗ на обложку</h5>
-          <p>Спокойная обложка с иконкой «щит/галочка» и коротким заголовком «Как мы подбираем тур». Без бейджей формата «№1» — акцент на процессе, а не на статусе.</p>
-        </div>
-      </article>
-    </section>
-
-    <section id="stories">
-      <span class="eyebrow">05 · Сторис</span>
-      <h2>4 темы: обложка + 1 слайд</h2>
-      <p class="section-sub">Максимум 2 экрана на тему. Только сухие факты того же цикла — без пересказа новостей.</p>
-
-      <div class="stories-grid">
-        <!-- STORY 1 -->
-        <div class="story-card">
-          <div class="story-card-head">
-            <h4>Сторис 01 · Знакомство</h4>
-            <span class="mono">2 экрана</span>
-          </div>
-          <div class="story-screens">
-            <div class="screen">
-              <span class="screen-lbl">Обложка</span>
-              <p>Логотип + подпись</p>
-              <p class="mono">«9 лет / 17 000+ путешественников в год»</p>
-            </div>
-            <div class="screen">
-              <span class="screen-lbl">Слайд</span>
-              <ul>
-                <li>На рынке с 2015 года</li>
-                <li>Туры в 180 стран</li>
-                <li>Офис в ТЦ Global Mall, Ленинская Слобода</li>
-              </ul>
-              <div class="cta-mini">Записаться на консультацию →</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STORY 2 -->
-        <div class="story-card">
-          <div class="story-card-head">
-            <h4>Сторис 02 · Услуги</h4>
-            <span class="mono">2 экрана</span>
-          </div>
-          <div class="story-screens">
-            <div class="screen">
-              <span class="screen-lbl">Обложка</span>
-              <p class="mono">«Не только туры»</p>
-            </div>
-            <div class="screen">
-              <span class="screen-lbl">Слайд</span>
-              <ul>
-                <li>Туры и авиабилеты</li>
-                <li>Отели и экскурсии</li>
-                <li>Визы, страховка, миграционные услуги</li>
-              </ul>
-              <div class="cta-mini">Написать в директ →</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STORY 3 -->
-        <div class="story-card">
-          <div class="story-card-head">
-            <h4>Сторис 03 · География</h4>
-            <span class="mono">2 экрана</span>
-          </div>
-          <div class="story-screens">
-            <div class="screen">
-              <span class="screen-lbl">Обложка</span>
-              <p class="mono">«Куда сейчас горят цены?»</p>
-            </div>
-            <div class="screen">
-              <span class="screen-lbl">Слайд</span>
-              <p>Турция · Египет · ОАЭ · Таиланд · Мальдивы</p>
-              <p class="mono">+1000 направлений</p>
-              <div class="cta-mini">Смотреть варианты →</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STORY 4 -->
-        <div class="story-card">
-          <div class="story-card-head">
-            <h4>Сторис 04 · Доверие</h4>
-            <span class="mono">2 экрана</span>
-          </div>
-          <div class="story-screens">
-            <div class="screen">
-              <span class="screen-lbl">Обложка</span>
-              <p class="mono">«Почему нам доверяют подбор тура»</p>
-            </div>
-            <div class="screen">
-              <span class="screen-lbl">Слайд</span>
-              <ul>
-                <li>Проверенные туроператоры</li>
-                <li>Цена без скрытых доплат</li>
-                <li>Сопровождение до и во время поездки</li>
-              </ul>
-              <div class="cta-mini">Задать вопрос →</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="sources" id="sources">
-      <span class="eyebrow">06 · Источники</span>
-      <ul>
-        <li><a href="https://msk.centrturov.ru" target="_blank" rel="noopener">msk.centrturov.ru</a></li>
-        <li><a href="https://msk.centrturov.ru/about/" target="_blank" rel="noopener">msk.centrturov.ru/about — о компании</a></li>
-        <li><a href="https://msk.centrturov.ru/tours/" target="_blank" rel="noopener">msk.centrturov.ru/tours — направления</a></li>
-        <li><a href="https://msk.centrturov.ru/reviews/" target="_blank" rel="noopener">msk.centrturov.ru/reviews — отзывы клиентов</a></li>
-      </ul>
-    </footer>
-  </main>
 </div>
+
+<main>
+  <header class="hero">
+    <span class="eyebrow">Техническое задание · Цикл 1</span>
+    <h1>Центр Горящих Туров</h1>
+    <p>Комплект тем для новостей и сторис на карточку компании в Яндекс Картах и 2ГИС. Последовательность строится от знакомства с компанией к спектру услуг, географии направлений и причинам доверия — без превосходных степеней и громких цифр, на фактах.</p>
+    <div class="hero-meta">
+      <span>4 новости + ТЗ на обложку</span>
+      <span>4 сторис · по 1 слайду, без обложки</span>
+      <span>Яндекс Карты · 2ГИС</span>
+    </div>
+  </header>
+
+  <section id="company">
+    <span class="eyebrow">01 · Компания</span>
+    <h2>Центр Горящих Туров, Москва</h2>
+    <p class="section-sub">Ключевые факты для опоры контента.</p>
+
+    <div class="facts-grid">
+      <div class="fact"><span class="k">Ниша</span><div class="v">Турагентство<small>Туры, авиабилеты, экскурсии, страхование</small></div></div>
+      <div class="fact"><span class="k">На рынке</span><div class="v">15 лет<small>стабильная работа с клиентами</small></div></div>
+      <div class="fact"><span class="k">География туров</span><div class="v">20+ стран<small>Турция, Египет, ОАЭ, Таиланд, Мальдивы, Вьетнам, Занзибар, Шри-Ланка</small></div></div>
+      <div class="fact"><span class="k">Офис</span><div class="v">ТЦ Global Mall<small>ул. Ленинская Слобода, 26, стр. 2, офис А 212.2</small></div></div>
+      <div class="fact"><span class="k">Контакты</span><div class="v">+7 905 501-00-15<small>+7 985 501-00-15 (для звонков) · msk@centrturov.ru</small></div></div>
+      <div class="fact"><span class="k">Доп. услуги</span><div class="v">Страхование<small>бронирование жилья, экскурсии</small></div></div>
+      <div class="fact"><span class="k">Публикация</span><div class="v">Яндекс Карты, 2ГИС<small>карточка компании, не сайт и не VK</small></div></div>
+    </div>
+  </section>
+
+  <section id="brandbook">
+    <span class="eyebrow">02 · Мини-брендбук</span>
+    <h2>Визуальное и тональное направление</h2>
+    <p class="section-sub">После анализа фирменных материалов компании определены цвета, типографика и стиль фотографии — их используем при подготовке макетов для новостей и сторис.</p>
+
+    <div class="brand-grid">
+      <div>
+        <div class="brand-card">
+          <h4>Палитра</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="role">Основной</span><div class="chip" style="background:#C1272D"></div><div class="name">Красный (лого, навигация)</div><div class="hex">#C1272D</div></div>
+            <div class="swatch"><span class="role">Акцентный</span><div class="chip" style="background:#A6362C"></div><div class="name">Бордовый (кнопки CTA)</div><div class="hex">#A6362C</div></div>
+            <div class="swatch"><span class="role">Второстепенный</span><div class="chip" style="background:#E2953F"></div><div class="name">Оранжевый (подзаголовки)</div><div class="hex">#E2953F</div></div>
+            <div class="swatch"><span class="role">Фоновый</span><div class="chip" style="background:#E7EAFB"></div><div class="name">Лавандовый (фон секций)</div><div class="hex">#E7EAFB</div></div>
+            <div class="swatch"><span class="role">Текстовый</span><div class="chip" style="background:#241F1F; border-color:#241F1F"></div><div class="name">Тёмный текст</div><div class="hex">#241F1F</div></div>
+          </div>
+        </div>
+        <div class="brand-card">
+          <h4>Типографика</h4>
+          <div class="type-sample">Заголовки</div>
+          <div class="type-label">Плотный слаб-серif с засечками, как в логотипе — крупно, заглавными, в красном</div>
+          <div class="type-sample body">Текст постов и подписи набираются нейтральным читаемым гротеском.</div>
+          <div class="type-label">Основной текст</div>
+          <div class="type-sample mono">ЦЕНА · ДАТЫ · –30%</div>
+          <div class="type-label" style="margin-bottom:0;">Цифры, цены, даты — моноширинным или капслоком для акцента</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="brand-card">
+          <h4>Фото и графика</h4>
+          <ul>
+            <li>Реальные кадры направлений и путешествий — тёплые, живые сцены (воздушные шары, пляж, достопримечательности), как на сайте компании</li>
+            <li>Фото-плитка в 3 колонки: чередование фото и текстового блока с CTA-кнопкой — по образцу блока услуг на сайте</li>
+            <li>Кнопки CTA — закруглённые, бордового цвета, белый текст, как на сайте</li>
+            <li>Акцентные подзаголовки блоков — оранжевым цветом, крупным кеглем</li>
+          </ul>
+        </div>
+        <div class="brand-card">
+          <h4>Тон коммуникации</h4>
+          <ul>
+            <li>Спокойный, фактологический тон travel-эксперта — без «лучший», «топовый», «№1»</li>
+            <li>Аргумент — через конкретику (страны, годы, отзывы), а не превосходные степени</li>
+            <li>Срочность горящих туров передаётся датами и ценами, а не восклицательными знаками</li>
+            <li>Прямое обращение на «вы», короткие предложения, понятные CTA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cycle">
+    <span class="eyebrow">03 · Логика цикла</span>
+    <h2>Единая последовательность на новости и сторис</h2>
+    <p class="section-sub">Четыре темы идут от знакомства с компанией к сути услуг, географии и причинам доверия — без повторов и скачков контекста.</p>
+
+    <div class="cycle">
+      <div class="cycle-step">
+        <span class="num">01</span>
+        <h4>Знакомство</h4>
+        <p>Кто такая компания: сколько лет на рынке и в каких странах работает</p>
+      </div>
+      <div class="cycle-step">
+        <span class="num">02</span>
+        <h4>Услуги</h4>
+        <p>Что решает агентство за один визит: туры, билеты, отели, страховка</p>
+      </div>
+      <div class="cycle-step">
+        <span class="num">03</span>
+        <h4>География</h4>
+        <p>Куда сейчас едут и где искать горящие туры</p>
+      </div>
+      <div class="cycle-step">
+        <span class="num">04</span>
+        <h4>Доверие</h4>
+        <p>Как устроен подбор тура и на что можно рассчитывать в поездке</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <span class="eyebrow">04 · Новости</span>
+    <h2>4 темы + ТЗ на обложку</h2>
+    <p class="section-sub">Для карточки компании на Яндекс Картах и 2ГИС. Каждая карточка — заголовок, цель публикации, тезисы для копирайтера, SEO-ключи, CTA и отдельное ТЗ на обложку.</p>
+
+    <!-- NEWS 1 -->
+    <article class="theme-card">
+      <div class="theme-head">
+        <div>
+          <span class="theme-num">Новость 01 · Знакомство</span>
+          <h3>15 лет на туристическом рынке: как работает Центр Горящих Туров в Москве</h3>
+        </div>
+        <span class="tag">Имиджевый</span>
+      </div>
+      <div class="theme-body">
+        <div class="theme-block">
+          <h5>Почему актуально</h5>
+          <p>Новые подписчики не знают, кто ведёт карточку и почему агентству можно доверить бронирование. Факты о компании и спектре услуг снимают первое недоверие ещё до контакта с менеджером.</p>
+        </div>
+        <div class="theme-block">
+          <h5>Тезисы для копирайтера</h5>
+          <ul>
+            <li>Компания на рынке 15 лет, офис — ТЦ Global Mall, ул. Ленинская Слобода, 26</li>
+            <li>Подбор туров в 20+ стран</li>
+            <li>Помимо туров — авиабилеты, экскурсии, бронирование жилья и страхование в одном агентстве</li>
+            <li>Без превосходных степеней и громких цифр: только факты вместо оценочных слов</li>
+          </ul>
+        </div>
+        <div class="theme-block full-row">
+          <h5>SEO-ключи</h5>
+          <div class="chips">
+            <span class="chip-tag">турагентство москва</span>
+            <span class="chip-tag">центр горящих туров москва</span>
+            <span class="chip-tag">турагентство ленинская слобода</span>
+            <span class="chip-tag">купить тур в москве</span>
+            <span class="chip-tag">надёжное турагентство</span>
+          </div>
+        </div>
+        <div class="theme-block full-row">
+          <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Оставьте заявку — подберём тур под ваш бюджет и даты</span></div>
+        </div>
+      </div>
+      <div class="cover-block">
+        <h5>ТЗ на обложку</h5>
+        <p>Логотип на белом фоне с фирменным красным акцентом (в стиле сайта), подпись «15 лет на рынке». Фото — тёплый живой кадр путешествия (воздушные шары, побережье), без стоковых клише.</p>
+      </div>
+    </article>
+
+    <!-- NEWS 2 -->
+    <article class="theme-card">
+      <div class="theme-head">
+        <div>
+          <span class="theme-num">Новость 02 · Услуги</span>
+          <h3>Тур, авиабилеты, отели и страховка — в одном агентстве и без беготни по разным сайтам</h3>
+        </div>
+        <span class="tag">Продающий</span>
+      </div>
+      <div class="theme-body">
+        <div class="theme-block">
+          <h5>Почему актуально</h5>
+          <p>Часть аудитории знает компанию только как «продавца туров» и ищет авиабилеты и страховку отдельно на других сервисах. Пост закрывает кросс-продажи и объясняет, что все задачи поездки решаются в одном месте.</p>
+        </div>
+        <div class="theme-block">
+          <h5>Тезисы для копирайтера</h5>
+          <ul>
+            <li>Подбор и бронирование туров у проверенных туроператоров</li>
+            <li>Отдельная продажа авиабилетов без покупки тура</li>
+            <li>Бронирование отелей и апартаментов, экскурсии по направлению</li>
+            <li>Оформление турстраховки с нужными опциями</li>
+            <li>Связь через телефон, мессенджеры и офис — на выбор клиента</li>
+          </ul>
+        </div>
+        <div class="theme-block full-row">
+          <h5>SEO-ключи</h5>
+          <div class="chips">
+            <span class="chip-tag">авиабилеты москва дёшево</span>
+            <span class="chip-tag">страховка для путешествий купить</span>
+            <span class="chip-tag">экскурсии заказать</span>
+            <span class="chip-tag">бронирование отеля тур</span>
+            <span class="chip-tag">бронирование тура онлайн москва</span>
+          </div>
+        </div>
+        <div class="theme-block full-row">
+          <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Напишите нам — решим любую задачу вашей поездки в одном чате</span></div>
+        </div>
+      </div>
+      <div class="cover-block">
+        <h5>ТЗ на обложку</h5>
+        <p>Иконка-сетка из 4–5 услуг (самолёт, отель, страховой полис, гид/экскурсия) в фирменных красных тонах на белом фоне — в стиле сайта. Заголовок обложки — «Всё для поездки в одном месте».</p>
+      </div>
+    </article>
+
+    <!-- NEWS 3 -->
+    <article class="theme-card">
+      <div class="theme-head">
+        <div>
+          <span class="theme-num">Новость 03 · География</span>
+          <h3>От Турции до Занзибара: где агентство подбирает горящие туры прямо сейчас</h3>
+        </div>
+        <span class="tag">Продающий</span>
+      </div>
+      <div class="theme-body">
+        <div class="theme-block">
+          <h5>Почему актуально</h5>
+          <p>Запросы про «горящие туры» и конкретные направления — самый частый повод для обращения. Пост объясняет суть формата и переводит интерес в заявку, оставаясь актуальным при любом сезоне за счёт формулировки.</p>
+        </div>
+        <div class="theme-block">
+          <h5>Тезисы для копирайтера</h5>
+          <ul>
+            <li>Горящий тур — пакет со скидкой от туроператора на скорый вылет, а не отдельная категория направлений</li>
+            <li>Основные направления: Турция, Египет, ОАЭ, Таиланд, Мальдивы, Вьетнам, Занзибар, Шри-Ланка</li>
+            <li>Всего агентство работает с 20+ странами — от пляжного отдыха до экскурсионных и комбинированных туров</li>
+            <li>Подбор идёт по бюджету и датам клиента, а не по фиксированному списку предложений</li>
+          </ul>
+        </div>
+        <div class="theme-block full-row">
+          <h5>SEO-ключи</h5>
+          <div class="chips">
+            <span class="chip-tag">горящие туры из москвы</span>
+            <span class="chip-tag">туры в турцию из москвы</span>
+            <span class="chip-tag">туры на занзибар</span>
+            <span class="chip-tag">туры во вьетнам</span>
+            <span class="chip-tag">туры на шри-ланку</span>
+          </div>
+        </div>
+        <div class="theme-block full-row">
+          <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Оставьте параметры поездки — пришлём варианты туров в течение часа</span></div>
+        </div>
+      </div>
+      <div class="cover-block">
+        <h5>ТЗ на обложку</h5>
+        <p>Коллаж-подборка направлений: метки/теги с названиями 8 стран на карте, фирменные красные акценты как на сайте. Без обобщающих цифр вроде «1000 направлений» — только реальный список.</p>
+      </div>
+    </article>
+
+    <!-- NEWS 4 -->
+    <article class="theme-card">
+      <div class="theme-head">
+        <div>
+          <span class="theme-num">Новость 04 · Доверие</span>
+          <h3>Как в Центре Горящих Туров подбирают тур: проверенные операторы, цена без доплат, поддержка на всех этапах</h3>
+        </div>
+        <span class="tag">Экспертный</span>
+      </div>
+      <div class="theme-body">
+        <div class="theme-block">
+          <h5>Почему актуально</h5>
+          <p>Перед бронированием чаще всего сомневаются в честности цены, надёжности оператора и в том, что будет, если что-то пойдёт не так в поездке. Пост закрывает эти возражения фактами о процессе — и подводит к заявке.</p>
+        </div>
+        <div class="theme-block">
+          <h5>Тезисы для копирайтера</h5>
+          <ul>
+            <li>Сравнение предложений нескольких проверенных туроператоров перед тем, как показать вариант</li>
+            <li>Цена фиксируется на этапе подбора — без скрытых доплат</li>
+            <li>Сопровождение с момента заявки до возвращения из поездки</li>
+            <li>Связь доступна по звонку (+7 985 501-00-15) и в мессенджерах — можно сослаться на раздел «Отзывы» карточки компании</li>
+          </ul>
+        </div>
+        <div class="theme-block full-row">
+          <h5>SEO-ключи</h5>
+          <div class="chips">
+            <span class="chip-tag">турагентство отзывы москва</span>
+            <span class="chip-tag">как выбрать тур</span>
+            <span class="chip-tag">надёжный туроператор</span>
+            <span class="chip-tag">поддержка в поездке турагентство</span>
+            <span class="chip-tag">заявка на подбор тура</span>
+          </div>
+        </div>
+        <div class="theme-block full-row">
+          <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Есть вопрос перед бронированием? Ответим в течение 15 минут</span></div>
+        </div>
+      </div>
+      <div class="cover-block">
+        <h5>ТЗ на обложку</h5>
+        <p>Спокойная обложка с иконкой «щит/галочка» и коротким заголовком «Как мы подбираем тур». Без бейджей формата «№1» — акцент на процессе, а не на статусе.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="stories">
+    <span class="eyebrow">05 · Сторис</span>
+    <h2>4 темы — по одному слайду</h2>
+    <p class="section-sub">Для карточки компании на Яндекс Картах и 2ГИС. Один экран на тему: тема, тезис слайда и дизайн-заметка для этого экрана.</p>
+
+    <div class="stories-grid">
+      <!-- STORY 1 -->
+      <article class="theme-card compact">
+        <div class="theme-head">
+          <div>
+            <span class="theme-num">Сторис 01 · Знакомство</span>
+            <h3>15 лет помогаем путешествовать</h3>
+          </div>
+        </div>
+        <div class="theme-body">
+          <div class="theme-block full-row">
+            <h5>Тезис слайда</h5>
+            <ul>
+              <li>Туры в 20+ стран</li>
+              <li>Полный комплекс услуг для поездки</li>
+              <li>Офис в ТЦ Global Mall, Ленинская Слобода</li>
+            </ul>
+          </div>
+          <div class="theme-block full-row">
+            <h5>Дизайн слайда</h5>
+            <p>Белый фон, заголовок фирменным красным (в стиле лого), тёплое живое фото путешествия. Бордовая CTA-кнопка внизу.</p>
+          </div>
+          <div class="theme-block full-row">
+            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Записаться на консультацию →</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STORY 2 -->
+      <article class="theme-card compact">
+        <div class="theme-head">
+          <div>
+            <span class="theme-num">Сторис 02 · Услуги</span>
+            <h3>Не только туры</h3>
+          </div>
+        </div>
+        <div class="theme-body">
+          <div class="theme-block full-row">
+            <h5>Тезис слайда</h5>
+            <ul>
+              <li>Туры и авиабилеты</li>
+              <li>Отели и экскурсии</li>
+              <li>Страхование поездки</li>
+            </ul>
+          </div>
+          <div class="theme-block full-row">
+            <h5>Дизайн слайда</h5>
+            <p>Иконки услуг в красных тонах на белом фоне, заголовок «Не только туры» крупным шрифтом сверху.</p>
+          </div>
+          <div class="theme-block full-row">
+            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Написать в директ →</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STORY 3 -->
+      <article class="theme-card compact">
+        <div class="theme-head">
+          <div>
+            <span class="theme-num">Сторис 03 · География</span>
+            <h3>Куда сейчас горят цены?</h3>
+          </div>
+        </div>
+        <div class="theme-body">
+          <div class="theme-block full-row">
+            <h5>Тезис слайда</h5>
+            <p>Турция · Египет · ОАЭ · Таиланд · Мальдивы · Вьетнам · Занзибар · Шри-Ланка — 8 направлений, подбор по бюджету и датам</p>
+          </div>
+          <div class="theme-block full-row">
+            <h5>Дизайн слайда</h5>
+            <p>Карта или сетка фото направлений, фирменные красные метки с названиями стран.</p>
+          </div>
+          <div class="theme-block full-row">
+            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Смотреть варианты →</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STORY 4 -->
+      <article class="theme-card compact">
+        <div class="theme-head">
+          <div>
+            <span class="theme-num">Сторис 04 · Доверие</span>
+            <h3>Почему нам доверяют подбор тура</h3>
+          </div>
+        </div>
+        <div class="theme-body">
+          <div class="theme-block full-row">
+            <h5>Тезис слайда</h5>
+            <ul>
+              <li>Проверенные туроператоры</li>
+              <li>Цена без скрытых доплат</li>
+              <li>Сопровождение до и во время поездки</li>
+            </ul>
+          </div>
+          <div class="theme-block full-row">
+            <h5>Дизайн слайда</h5>
+            <p>Иконка «щит/галочка» в красном на спокойном белом фоне, короткий заголовок сверху.</p>
+          </div>
+          <div class="theme-block full-row">
+            <div class="cta-line"><span class="lbl">CTA</span><span class="cta-pill">Задать вопрос →</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="sources" id="sources">
+    <span class="eyebrow">Источники</span>
+    <ul>
+      <li><a href="https://msk.centrturov.ru" target="_blank" rel="noopener">msk.centrturov.ru</a></li>
+      <li><a href="https://msk.centrturov.ru/about/" target="_blank" rel="noopener">msk.centrturov.ru/about — о компании</a></li>
+      <li><a href="https://msk.centrturov.ru/tours/" target="_blank" rel="noopener">msk.centrturov.ru/tours — направления</a></li>
+      <li><a href="https://msk.centrturov.ru/reviews/" target="_blank" rel="noopener">msk.centrturov.ru/reviews — отзывы</a></li>
+      <li>Скриншоты главной страницы и блока услуг сайта — 03.09.2026</li>
+    </ul>
+  </footer>
+
+  <section id="map">
+    <span class="eyebrow">06 · Карта тем</span>
+    <h2>История циклов</h2>
+    <p class="section-sub">Темы по циклам — полный реестр ведётся отдельно и пополняется с каждым новым циклом.</p>
+
+    <div class="map-timeline">
+      <div class="map-cycle">
+        <div class="map-cycle-head">
+          <h4>Цикл 1</h4>
+          <span class="badge-current">Актуальный</span>
+        </div>
+        <div class="map-cols">
+          <div>
+            <h5>Новости</h5>
+            <ul>
+              <li><b>15 лет на туристическом рынке</b><span>Знакомство с компанией</span></li>
+              <li><b>Тур, авиабилеты, отели и страховка</b><span>Полный комплекс услуг</span></li>
+              <li><b>От Турции до Занзибара</b><span>География горящих туров</span></li>
+              <li><b>Как подбирают тур</b><span>Доверие и гарантии</span></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Сторис</h5>
+            <ul>
+              <li><b>15 лет помогаем путешествовать</b><span>Знакомство</span></li>
+              <li><b>Не только туры</b><span>Услуги</span></li>
+              <li><b>Куда сейчас горят цены?</b><span>География</span></li>
+              <li><b>Почему нам доверяют подбор тура</b><span>Доверие</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 </body>
 </html>
